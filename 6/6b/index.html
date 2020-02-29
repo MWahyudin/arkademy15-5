@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Arkademy Batch 15 K2</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<script type="text/javascript" src="assets/js/jQuery.js"></script>
+	<script type="text/javascript" src="data/dataDevs.js"></script>
+</head>
+<body> 
+    <header>
+		<div class="jumbotron">
+            <img src="assets/image/arkademy.png" width="150px" id="arkademy">
+            <h1 id="arkademy-bootcamp">ARKADEMY BOOTCAMP</h1>
+			<button class="btn" id="add">ADD</button>
+		</div>
+    </header>
+    <table class="table" id="myTable">
+        <thead >
+            <tr>
+                <th>No</th>
+                <th>Cashier</th>
+                <th>Product</th>
+                <th>Category</th>
+				<th>Price</th>
+				<th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="myTbody">
+
+        </tbody>
+    </table>
+
+    <div class="bg" id="form-edit">
+        <form>
+            <div class="form">
+                <div class="header-form">
+                    <h1> EDIT DATA </h1>
+                    <button class="close-form"> X</button>
+                </div>
+                <div class="form-container">
+                   <select name="cashier" class="cashier" required>
+                        <option value="Raisa Andriana" >Raisa Andriana</option>
+                        <option value="Pevita Pearce">Pevita Pearce</option>
+                        <option value="Mohamad Wahyudin">Mohamad Wahyudin</option>
+						<option value="Joko Purwadhi">Joko Purwadhi</option>
+                    </select>
+                     
+                    <select name="Drink" class="Drink" required>
+                        <option value="Drink" >Drink</option>
+                        <option value="Food">Food</option>
+                     
+                    </select>
+					<input type="text" placeholder="Ice Tea">
+					<input type="text" placeholder="Rp.10.000">
+                </div>
+                <button type="submit" class="btn" id="confirm-edit" 
+                style="float: right; margin: 30px 30px 20px 0;">EDIT</button>
+            </div>
+        </form>
+    </div>
+    <div class="bg" id="form-add">
+        <form>
+            <div class="form">
+                <div class="header-form">
+                    <h1> ADD DATA </h1>
+                    <button class="close-form"> X</button>
+                </div>
+                <div class="form-container">
+                     <select name="cashier" class="cashier" required>
+                        <option value="Raisa Andriana" >Raisa Andriana</option>
+                        <option value="Pevita Pearce">Pevita Pearce</option>
+                        <option value="Mohamad Wahyudin">Mohamad Wahyudin</option>
+                        <option value="Joko Purwadhi">Joko Purwadhi</option>
+                    </select>
+                     
+                    <select name="Drink" class="Drink" required>
+                        <option value="Drink" >Drink</option>
+                        <option value="Food">Food</option>
+                     
+                    </select>
+                    <input type="text" placeholder="Ice Tea">
+                    <input type="text" placeholder="Rp.10.000">
+                </div>
+                <button type="submit" class="btn" id="confirm-add" 
+                style="float: right; margin: 30px 30px 20px 0;">ADD</button>
+            </div>
+        </form>
+    </div>
+    <div class="bg" id="deleted">
+        <form>
+            <div class="form">
+                <div class="header-form">
+                    <button class="close-form" style="margin-bottom: 10px;">X</button>
+                </div>
+                <div class="form-container" style="text-align: center;">
+                    <img src="assets/image/checked.png" style="margin: auto;">
+                    <h2 style="margin-bottom: 20px" id="dataDel">Data Berhasil dihapus!</h2>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $( document ).ready(function() {
+            function setData(){
+                let myTD = "<tbody><tr>";
+                for(var i=0 ; i<(data.length); i++){
+                    myTD+=`<td> ${data[i].no}</td>`;
+                    myTD+=`<td> ${data[i].cashier}</td>`;
+                    myTD+=`<td> ${data[i].product}</td>`;
+					myTD+=`<td> ${data[i].category}</td>`;
+					myTD+=`<td> ${data[i].price}</td>`;
+                    myTD+=`<td><img src="assets/image/delete.png" alt="del" width="25" class="delete" data-id="${i}">
+                    <img src="assets/image/edit.png" alt="edit" width="25" class="edit" data-id="${i}"> </td> </tr>`;
+                }
+                document.getElementById("myTbody").innerHTML = myTD;
+            }
+            setData();
+            
+
+            $('#add').click(function(){
+                $('#form-add').fadeIn('slow');
+            });
+
+            $('#myTable').on('click','.edit',function(){
+                $('#form-edit').fadeIn('slow');
+                var i = $(this).data('id');
+            });
+            
+            $('#myTable').on('click','.delete',function(){
+                $('#deleted').fadeIn('slow');
+                var i = $(this).data('id');
+                $('#dataDel').text("Data "+data[i].cashier +" Berhasil dihapus");
+            });
+
+            $('.close-form').click(function(){
+                $('.bg').fadeOut('slow');
+            });
+        });
+    </script>
+</body>
+</html>
